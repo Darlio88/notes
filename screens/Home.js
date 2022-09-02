@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,ScrollView} from 'react-native'
+import { StyleSheet, Text, View,ScrollView, TouchableOpacity} from 'react-native'
 import React, {useLayoutEffect} from 'react'
 import { useNavigation } from '@react-navigation/native'
 
@@ -11,6 +11,7 @@ import {colors } from '../assets/colors'
 
 //importing notecARD COMPONENT
 import NoteCard from '../components/NoteCard';
+import NoteCatergory from '../components/NoteCatergory';
 const Home = () => {
   const navigation= useNavigation()
   useLayoutEffect(() => {
@@ -19,30 +20,45 @@ const Home = () => {
     })
   }, [])
   return (
-    <View 
-    style={{backgroundColor:colors.whiteLight}}
+    <View  style={{backgroundColor:colors.whiteLight}}
     className='flex-1 py-8 px-5' >
-      <View className='flex-row justify-between items-center'>
-        <View className='flex-row items-center space-x-2' >
-        <MaterialCommunityIcons 
-        name="notebook-edit-outline" 
-        size={32} 
-        color="black" />
-        <Text>Notes</Text>
-        </View>
-        <View className=''>
-        <FontAwesome name="search" size={24} color="black" />
-        </View>
-      </View>
-      <View
+    <View className='flex-row justify-between items-center'>
+    <View className='flex-row items-center space-x-2 pb-3' >
+    <MaterialCommunityIcons 
+    name="notebook-edit-outline" 
+    size={32} 
+    color={colors.black} />
+    <Text 
+    className='font-bold text-lg'
+    style={{color:colors.black}}>
+
+      Notes
+      </Text>
+    </View>
+    <View className=''>
+    <FontAwesome name="search" size={24} color={colors.black} />
+    </View>
+  </View>
+    <ScrollView 
+    showsVerticalScrollIndicator={false}
+   >
      
+      <View
       className='flex-row justify-between items-center, my-8'>
-        <Text>Notes List</Text>
-        <View className='flex-row justify-between items-center'>
-          <Text>All notes</Text>
-          <MaterialCommunityIcons name="filter" size={24} color="black" />
-        </View>
+        <Text 
+        className="font-bold text-base"
+        style={{color:colors.black}}>Notes List</Text>
       </View>
+      <ScrollView 
+      showsHorizontalScrollIndicator={false}
+      horizontal={true}>
+<NoteCatergory />
+<NoteCatergory />
+<NoteCatergory />
+<NoteCatergory />
+<NoteCatergory />
+<NoteCatergory />
+      </ScrollView>
       <ScrollView showsVerticalScrollIndicator={false}>
        <NoteCard />
        <NoteCard />
@@ -52,6 +68,7 @@ const Home = () => {
        <NoteCard />
        <NoteCard />
       </ScrollView>
+    </ScrollView>
     </View>
   )
 }
