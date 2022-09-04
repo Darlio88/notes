@@ -52,7 +52,9 @@ const BottomTabs = () => {
         <Tabs.Screen 
         name='favorites'
          component={Favorites} 
+         
          options={{
+          presentation:"modal",
           tabBarIcon:({size, color})=>(
             <MaterialCommunityIcons name="crown-outline" size={size} color={color} />)
         }}

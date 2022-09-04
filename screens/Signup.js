@@ -8,9 +8,9 @@ import {colors} from '../assets/colors'
 import { Api } from '../assets/api';
 
 const Signup = () => {
-    const [userEmail, setUserEmail]= useState()
-    const [userName, setUserName]= useState()
-    const [password,setPassword] = useState()
+    const [userEmail, setUserEmail]= useState("")
+    const [userName, setUserName]= useState("")
+    const [password,setPassword] = useState("")
  
 const navigation = useNavigation()
 useLayoutEffect(() => {

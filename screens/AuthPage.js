@@ -10,8 +10,8 @@ const axios =require('axios').default
 import {APi} from '../assets/api'
 
 const AuthPage = () => {
-  const [userEmail, setUserEmail]= useState()
-  const [password,setPassword] = useState()
+  const [userEmail, setUserEmail]= useState("")
+  const [password,setPassword] = useState("")
 
 const navigation = useNavigation()
   useLayoutEffect(() => {
@@ -20,9 +20,8 @@ headerShown:false,
    })
   }, [])
 const handleSubmit =() =>{
-  alert(userEmail+password)
 
-  navigation.navigate('bottom-tabs', {userEmail:userEmail, password:password})
+  navigation.navigate('bottom-tabs')
 }
 
     

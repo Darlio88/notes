@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
 import React,{useLayoutEffect} from 'react'
 import { useNavigation } from '@react-navigation/native'
 //importing the color scheming
@@ -25,7 +25,9 @@ useLayoutEffect(() => {
       <Text 
       className='text-base font-bold'
       style={{color:colors.black}}>Catergories</Text>
+      <TouchableOpacity>
       <AntDesign name="pluscircleo" size={24} color={colors.black} />
+      </TouchableOpacity>
       </View>
       <ScrollView  
       
