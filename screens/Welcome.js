@@ -15,10 +15,12 @@ const Welcome = () => {
   }, [])
 useEffect(() => {
  setTimeout(() => {
-  navigation.navigate('bottom-tabs')
+  navigation.navigate('auth-page')
  }, 1000);
-}, [navigation])
-
+}, [])
+setTimeout(() => {
+  navigation.navigate('auth-page')
+ }, 1000);
   return (
     <View 
     className="full-screen flex-1 justify-around items-center" 

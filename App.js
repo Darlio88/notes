@@ -6,8 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 //importing the screens
-import Welcome from './screens/Welcome';
 import BottomTabs from './navigation/BottomTabs';
+import WelcomeStack from './navigation/WelcomeStack';
 const Stack= createNativeStackNavigator()
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
   <TailwindProvider>
     <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name='welcome' component={Welcome} />
+          <Stack.Screen name='welcome-pages' component={WelcomeStack} />
           <Stack.Screen name='bottom-tabs' component={BottomTabs} />
         </Stack.Navigator>
 

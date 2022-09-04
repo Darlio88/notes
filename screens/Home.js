@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 //importing icons-pack
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 //importing colors
 import {colors } from '../assets/colors'
 
@@ -35,30 +36,12 @@ const Home = () => {
       Notes
       </Text>
     </View>
-    <View className=''>
-    <FontAwesome name="search" size={24} color={colors.black} />
-    </View>
+    <TouchableOpacity className=''>
+    <FontAwesome name="search" size={20} color={colors.black} />
+    </TouchableOpacity>
+
   </View>
-    <ScrollView 
-    showsVerticalScrollIndicator={false}
-   >
-     
-      <View
-      className='flex-row justify-between items-center, my-8'>
-        <Text 
-        className="font-bold text-base"
-        style={{color:colors.black}}>Notes List</Text>
-      </View>
-      <ScrollView 
-      showsHorizontalScrollIndicator={false}
-      horizontal={true}>
-<NoteCatergory />
-<NoteCatergory />
-<NoteCatergory />
-<NoteCatergory />
-<NoteCatergory />
-<NoteCatergory />
-      </ScrollView>
+  
       <ScrollView showsVerticalScrollIndicator={false}>
        <NoteCard />
        <NoteCard />
@@ -68,7 +51,23 @@ const Home = () => {
        <NoteCard />
        <NoteCard />
       </ScrollView>
-    </ScrollView>
+ <TouchableOpacity 
+ onPress={()=>navigation.navigate("create-note")}
+ style={{marginRight:4,}}>
+ <View 
+  style={{position:'absolute',
+  shadowRadius:4,
+  shadowColor:colors.white,
+   right:0,
+   bottom:20,
+   height:64,
+   width:64,
+   backgroundColor:colors.black,
+   elevation:5}} 
+  className="justify-center items-center rounded-full">
+  <AntDesign name="plus" size={32} color={colors.whiteLight} />
+  </View>
+ </TouchableOpacity>
     </View>
   )
 }
