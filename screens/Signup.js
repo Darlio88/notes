@@ -19,15 +19,15 @@ headerShown:false,
  })
 }, [])
 const handleSubmit =() =>{
-Api.post('/user/sign-up',{
-  userEmail:"ateraraaron@gmail.com",
-  userName:"ateraraaron",
-  password:"fuckojimum"
+Api.post('/api/user/sign-up',{
+  userEmail,
+  userName,
+  password
 }).then(function (response) {
-  console.info(response);
+  console.log(response.data);
 })
 .catch(function (error) {
-  console.info(error);
+  console.log(error);
 });
 }
 

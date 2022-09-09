@@ -1,15 +1,19 @@
 import { StyleSheet, Text, View, TouchableOpacity,TextInput, KeyboardAvoidingView } from 'react-native'
 import React, {useLayoutEffect, useEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector, useDispatch } from 'react-redux';
+
 import { AntDesign } from '@expo/vector-icons';
 import {colors} from '../assets/colors'
 
 const axios =require('axios').default
 
 
-import {APi} from '../assets/api'
+import {Api} from '../assets/api'
+import { saveUser } from '../features/userSlice';
 
 const AuthPage = () => {
+  const dispatch = useDispatch()
   const [userEmail, setUserEmail]= useState("")
   const [password,setPassword] = useState("")
 
@@ -19,9 +23,16 @@ const navigation = useNavigation()
 headerShown:false,
    })
   }, [])
-const handleSubmit =() =>{
 
-  navigation.navigate('bottom-tabs')
+
+const handleSubmit =() =>{
+  Api.post("/api/user/sign-in",
+  {userEmail:userEmail, password:password}).then((res)=>{
+    dispatch(saveUser({userId:res.data._id, userName:res.data.userName, userEmail:res.data.userEmail}))
+  }).catch((err)=>{
+    console.log(err)
+  })
+  // navigation.navigate('bottom-tabs')
 }
 
     

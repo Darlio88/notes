@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity,SafeAreaView, KeyboardAvoidingView} from 'react-native'
 import React, {useLayoutEffect,useState ,useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch,useSelector } from 'react-redux';
 
 //importing icon packs
 import { AntDesign } from '@expo/vector-icons';
@@ -12,12 +13,18 @@ import {colors} from '../assets/colors'
 
 //importing api 
 import { Api } from '../assets/api';
+
+
 const CreateNote = () => {
-  const navigation = useNavigation()
+const navigation = useNavigation()
 const [description, setDescription] = useState("")
+const [catergory, setCatergory] = useState("")
 const [title, setTitle] = useState("")
 const [tags, setTags] = useState("")
 const handleSubmit =()=>{
+  const tagsList = tags.length >0 ?tags.split(','):[]
+  const creatorId = useSelector((state)=>state.saveUser.id)
+  Api.post("/api/note/create-note", {title, description,catergory,tags:tagsList,creatorId})
   navigation.navigate("bottom-tabs",{screen:"favorites"})
 }
   useLayoutEffect(() => {
@@ -55,6 +62,20 @@ const handleSubmit =()=>{
           placeholder='Enter title here'/>
           </View>
         </View>
+        {/* CATERGORY OF THE NOTE */}
+        <View className="w-full mt-4">
+          <Text>Title</Text>
+          <View 
+          style={{borderBottomWidth:1, borderColor:colors.blackLight}}
+          className="">
+          <TextInput 
+          value={catergory}
+          onChangeText={setCatergory}
+          style={{color:colors.black}}
+          placeholderTextColor={colors.blackLight}
+          placeholder='Enter catergory here'/>
+          </View>
+        </View>
 {/* DESCRIPTION OF THE NOTE */}
         <View className="w-full mt-4">
           <Text>Description</Text>
@@ -81,7 +102,7 @@ const handleSubmit =()=>{
           onChangeText={setTags} 
           style={{color:colors.black}}
           placeholderTextColor={colors.blackLight}
-          placeholder='Enter tags of your note'/>
+          placeholder='Enter tags of your note seperated by commas'/>
           </View>
           
         </View>
