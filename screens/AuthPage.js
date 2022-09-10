@@ -29,6 +29,7 @@ const handleSubmit =() =>{
   Api.post("/api/user/sign-in",
   {userEmail:userEmail, password:password}).then((res)=>{
     dispatch(saveUser({userId:res.data._id, userName:res.data.userName, userEmail:res.data.userEmail}))
+    navigation.navigate("bottom-tabs")
   }).catch((err)=>{
     console.log(err)
   })

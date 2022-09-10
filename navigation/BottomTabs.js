@@ -10,10 +10,13 @@ import { Octicons } from '@expo/vector-icons';
 
 //importing Bottom tab navigator components 
 import Home from '../screens/Home'
+import HomeStack from './HomeStack';
 import Favorites from '../screens/Favorites'
 import Catergories from '../screens/Catergories'
 import Settings from '../screens/Settings'
 import { colors } from '../assets/colors';
+
+
 const Tabs = createBottomTabNavigator()
 
 const BottomTabs = () => {
@@ -43,8 +46,8 @@ const BottomTabs = () => {
     }}
     >
         <Tabs.Screen 
-        name='home' 
-        component={Home} 
+        name='home-stack' 
+        component={HomeStack} 
         options={{
           tabBarIcon:({size, color})=>(<AntDesign name="home" size={size} color={color} />)
         }}

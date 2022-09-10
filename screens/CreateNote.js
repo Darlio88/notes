@@ -16,18 +16,46 @@ import { Api } from '../assets/api';
 
 
 const CreateNote = () => {
+const user = useSelector(state=>state.userDetails.userDetails)
+const creatorId = user.userId
 const navigation = useNavigation()
 const [description, setDescription] = useState("")
 const [catergory, setCatergory] = useState("")
 const [title, setTitle] = useState("")
 const [tags, setTags] = useState("")
+
+
+//clear form on submit
+function clearForm(){
+  setTitle('')
+  setDescription('')
+  setTags('')
+  setCatergory('')
+}
+//handle close form creation
+const closeForm = ()=>{
+  clearForm();
+  navigation.navigate("bottom-tabs")
+}
+
+//handle data submission
 const handleSubmit =()=>{
   const tagsList = tags.length >0 ?tags.split(','):[]
-  const creatorId = useSelector((state)=>state.saveUser.id)
-  Api.post("/api/note/create-note", {title, description,catergory,tags:tagsList,creatorId})
-  navigation.navigate("bottom-tabs",{screen:"favorites"})
+  Api.post("/api/note/create-note", 
+  {title, description,catergory,tags:tagsList,creatorId}).then((response)=>{
+    console.log(response.data)
+    navigation.navigate("home")
+    clearForm()
+  }).catch(err=>{
+    console.log(err)
+  })
+
 }
+useEffect(()=>{
+  console.log(creatorId)
+},[])
   useLayoutEffect(() => {
+    
    navigation.setOptions({
     headerShown:false,
    })
@@ -37,7 +65,7 @@ const handleSubmit =()=>{
       <View 
       style={{borderBottomWidth:1, borderColor:colors.white}}
       className="flex-row justify-between w-full items-center full mt-2 pb-5">
-        <TouchableOpacity onPress={()=>navigation.navigate("bottom-tabs")}>
+        <TouchableOpacity onPress={closeForm}>
         <AntDesign name="closecircleo" size={24} color={colors.black} />
         </TouchableOpacity>
       <Text 
@@ -64,7 +92,7 @@ const handleSubmit =()=>{
         </View>
         {/* CATERGORY OF THE NOTE */}
         <View className="w-full mt-4">
-          <Text>Title</Text>
+          <Text>Catergory</Text>
           <View 
           style={{borderBottomWidth:1, borderColor:colors.blackLight}}
           className="">

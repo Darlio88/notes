@@ -1,21 +1,51 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
-import React,{useLayoutEffect} from 'react'
+import React,{useLayoutEffect, useEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
+import {useSelector} from "react-redux"
+
+
+
 //importing the color scheming
 import {colors} from '../assets/colors'
+//importing backgroundcolors
+import {backgroundColors} from "../assets/colors"
+
 //importing icon poacks
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 //importing CatergoryCard from components
 import CatergoryCard from '../components/CatergoryCard'
 
+//importing the api
+import { Api } from '../assets/api';
+
 const Catergories = () => {
-  const navigation = useNavigation()
+  const user = useSelector(state=>state.userDetails.userDetails)
+  const navigation= useNavigation()
+  const [notes, setNotes] = useState([])
+
+  const [notesCatergory, setNotesCatergory] = useState([])
+  
+
+  useEffect(() => {
+        Api.get(`/api/note/get-notes/${user.userId}`).then((res)=>{
+    setNotes(res.data)
+        }).catch((error)=>{
+    console.log(error)
+    })
+   }, [])
+
+   useEffect(()=>{
+
+   },[notes])
 useLayoutEffect(() => {
  navigation.setOptions({
   headerShown:false,
  })
 }, [])
+
+const catergorizedList =[]
+ 
   return (
     <View className='pt-10 pb-20'>
       <View 

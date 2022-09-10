@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 import Welcome from '../screens/Welcome'
 import AuthPage from '../screens/AuthPage'
 import Signup from '../screens/Signup'
-import CreateNote from '../screens/CreateNote'
+
 
 const Stack = createNativeStackNavigator()
 
@@ -21,11 +21,10 @@ const WelcomeStack = () => {
      })
     }, [navigation])
   return (
-  <Stack.Navigator>
+  <Stack.Navigator >
 <Stack.Screen name='welcome' component={Welcome} />
 <Stack.Screen name='auth-page' component={AuthPage} />
 <Stack.Screen name='signup' component={Signup} />
-<Stack.Screen name='create-note' component={CreateNote} />
   </Stack.Navigator>
   )
 }

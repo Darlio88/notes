@@ -2,12 +2,17 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React, {useLayoutEffect, useEffect} from 'react'
 import { useNavigation} from '@react-navigation/native'
 import ProgressBar from 'react-native-progress/Bar';
-
+import { useSelector } from 'react-redux';
 //importing colors
 import {colors} from '../assets/colors'
 
 const Welcome = () => {
+  const user = useSelector(state=>state.userDetails.userDetails)
   const navigation = useNavigation()
+  useEffect(() => {
+    console.log(user)
+  }, [])
+  
   useLayoutEffect(() => {
   navigation.setOptions({
     headerShown:false,
@@ -15,12 +20,13 @@ const Welcome = () => {
   }, [])
 useEffect(() => {
  setTimeout(() => {
-  navigation.navigate('auth-page')
+  if(!(user?.userId)) {
+    navigation.navigate('auth-page')
+} else{
+    navigation.navigate("bottom-tabs")
+}
  }, 1000);
 }, [])
-setTimeout(() => {
-  navigation.navigate('auth-page')
- }, 1000);
   return (
     <View 
     className="full-screen flex-1 justify-around items-center" 

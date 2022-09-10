@@ -12,8 +12,9 @@ export const userSlice = createSlice({
     initialState,
     reducers:{
         saveUser:(state, action) =>{
-        state= {...action.payload}
-        console.log(state)
+        state.userId=action.payload.userId
+        state.userName=action.payload.userName
+        state.userEmail=action.payload.userEmail
         }
     }
 })

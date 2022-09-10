@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View,ScrollView, TouchableOpacity} from 'react-native'
-import React, {useLayoutEffect} from 'react'
+import React, {useLayoutEffect, useEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux';
 
 //importing icons-pack
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -10,11 +11,28 @@ import { AntDesign } from '@expo/vector-icons';
 import {colors } from '../assets/colors'
 
 
+
 //importing notecARD COMPONENT
 import NoteCard from '../components/NoteCard';
 import NoteCatergory from '../components/NoteCatergory';
+
+//importing the api
+import { Api } from '../assets/api';
+
 const Home = () => {
+const user = useSelector(state=>state.userDetails.userDetails)
   const navigation= useNavigation()
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+   Api.get(`/api/note/get-notes/${user.userId}`).then((res)=>{
+setNotes(res.data)
+   }).catch((error)=>{
+console.log(error)
+   })
+  }, [])
+  
+ 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown:false,
@@ -43,15 +61,15 @@ const Home = () => {
   </View>
   
       <ScrollView showsVerticalScrollIndicator={false}>
-       <NoteCard />
-       <NoteCard />
-       <NoteCard />
-       <NoteCard />
-       <NoteCard />
-       <NoteCard />
-       <NoteCard />
+        { notes.length>0 ?
+        notes.map((note, index)=>(<NoteCard key={index} note={note}/>)) : 
+        <Text>you don't have any notes</Text>
+        }
+      
+     
       </ScrollView>
  <TouchableOpacity 
+ 
  onPress={()=>navigation.navigate("create-note")}
  style={{marginRight:4,}}>
  <View 

@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, {useLayoutEffect, useEffect} from 'react'
+import React, {useLayoutEffect, useEffect, useState} from 'react'
 import {useNavigation} from "@react-navigation/native"
 
 
@@ -10,7 +10,6 @@ import NoteCard from '../components/NoteCard';
 
 const Favorites = () => {
 const navigation = useNavigation()
-
 useLayoutEffect(() => {
  navigation.setOptions({
   headerShown:false,
