@@ -14,6 +14,8 @@ import {colors} from '../assets/colors'
 //importing api 
 import { Api } from '../assets/api';
 
+//catergories
+
 
 const CreateNote = () => {
 const user = useSelector(state=>state.userDetails.userDetails)
@@ -35,7 +37,7 @@ function clearForm(){
 //handle close form creation
 const closeForm = ()=>{
   clearForm();
-  navigation.navigate("bottom-tabs")
+  navigation.navigate("home")
 }
 
 //handle data submission
@@ -101,7 +103,7 @@ useEffect(()=>{
           onChangeText={setCatergory}
           style={{color:colors.black}}
           placeholderTextColor={colors.blackLight}
-          placeholder='Enter catergory here'/>
+          placeholder='Enter any of these.. personal,work,family, study'/>
           </View>
         </View>
 {/* DESCRIPTION OF THE NOTE */}

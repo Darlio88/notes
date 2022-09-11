@@ -4,7 +4,7 @@ import {useNavigation} from "@react-navigation/native"
 
 
 //importing notecARD COMPONENT
-import NoteCard from '../components/NoteCard';
+// import NoteCard from '../components/NoteCard';
 
 
 
@@ -20,14 +20,14 @@ useLayoutEffect(() => {
       <Text className='font-bold text-lg my-3'>Favorites</Text>
       <View className=' flex-row space-x-2 pb-3 w-full'>
       <ScrollView showsVerticalScrollIndicator={false}>
+      {/* <NoteCard />
       <NoteCard />
       <NoteCard />
       <NoteCard />
       <NoteCard />
       <NoteCard />
-      <NoteCard />
-       
-     
+        */}
+     <Text>You dont have any favorites</Text>
       </ScrollView>
       </View>
     

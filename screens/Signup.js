@@ -5,26 +5,38 @@ import { AntDesign } from '@expo/vector-icons';
 import {colors} from '../assets/colors'
 
 //importing api
-import { Api } from '../assets/api';
+import {Api} from '../assets/api'
+import { saveUser } from '../features/userSlice';
+import { useSelector, useDispatch } from 'react-redux'
+
 
 const Signup = () => {
+  const dispatch = useDispatch()
     const [userEmail, setUserEmail]= useState("")
     const [userName, setUserName]= useState("")
     const [password,setPassword] = useState("")
- 
+    const clearInputs = () =>{
+      setUserEmail("")
+      setUserName("")
+      setPassword("")
+    }
 const navigation = useNavigation()
 useLayoutEffect(() => {
  navigation.setOptions({
 headerShown:false,
  })
 }, [])
+
+
 const handleSubmit =() =>{
 Api.post('/api/user/sign-up',{
   userEmail,
   userName,
   password
-}).then(function (response) {
-  console.log(response.data);
+}).then(function (res) {
+  dispatch(saveUser({userId:res.data._id, userName:res.data.userName, userEmail:res.data.userEmail}))
+  navigation.navigate("bottom-tabs")
+  clearInputs();
 })
 .catch(function (error) {
   console.log(error);

@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import {colors} from '../assets/colors'
 
-const axios =require('axios').default
 
 
 import {Api} from '../assets/api'
@@ -24,12 +23,16 @@ headerShown:false,
    })
   }, [])
 
-
+const clearInputs = () =>{
+  setUserEmail("")
+  setPassword("")
+}
 const handleSubmit =() =>{
   Api.post("/api/user/sign-in",
   {userEmail:userEmail, password:password}).then((res)=>{
     dispatch(saveUser({userId:res.data._id, userName:res.data.userName, userEmail:res.data.userEmail}))
     navigation.navigate("bottom-tabs")
+    clearInputs()
   }).catch((err)=>{
     console.log(err)
   })

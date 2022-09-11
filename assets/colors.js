@@ -5,4 +5,5 @@ export const colors={
     blackLight:'#626362',
     lightBlue:'#6996EA',
     maroon:'#8E7085',
+    secondary:"#e63946",
 }

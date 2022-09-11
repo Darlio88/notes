@@ -24,10 +24,16 @@ const Catergories = () => {
   const navigation= useNavigation()
   const [notes, setNotes] = useState([])
 
-  const [notesCatergory, setNotesCatergory] = useState([])
-  
+//arrangine the catergories in a state manner
 
-  useEffect(() => {
+const [personal, setPersonal] = useState([])
+const [study, setStudy] = useState([])
+const [family, setFamily] = useState([])
+const [work, setWork] = useState([])
+const [sport, setSport] = useState([])
+const [uncatergorized, setUncatergorized] = useState([])
+
+  useLayoutEffect(() => {
         Api.get(`/api/note/get-notes/${user.userId}`).then((res)=>{
     setNotes(res.data)
         }).catch((error)=>{
@@ -36,7 +42,21 @@ const Catergories = () => {
    }, [])
 
    useEffect(()=>{
-
+    notes.map((note)=>{
+      if(note.catergory.toLowerCase()==='personal'){
+       return setPersonal((state) =>[...state, note])
+      } else if(note.catergory.toLowerCase()==='study'){
+        return setStudy((state) =>[...state, note])
+      } else if(note.catergory.toLowerCase()==='family'){
+        return setFamily((state) =>[...state, note])
+      } else if(note.catergory.toLowerCase()==='work'){
+        return setWork((state) =>[...state, note])
+      } else if(note.catergory.toLowerCase()==='sport'){
+        return setSport((state) =>[...state, note])
+      } else{
+        return setUncatergorized((state)=>[...state, note])
+      }
+    } )
    },[notes])
 useLayoutEffect(() => {
  navigation.setOptions({
@@ -44,7 +64,6 @@ useLayoutEffect(() => {
  })
 }, [])
 
-const catergorizedList =[]
  
   return (
     <View className='pt-10 pb-20'>
@@ -65,29 +84,26 @@ const catergorizedList =[]
     >
       <View className='my-3'>
         <Text 
-        className="text-base font-bold italic"
+        className="text-base font-bold italic pl-3"
         style={{color:colors.black}}>List Catergories</Text>
       </View>
       <View className="space-y-2">
       <View className='flex-row justify-around'>
-    <CatergoryCard />
-    <CatergoryCard />
+    <CatergoryCard name='personal' count={personal.length}/>
+    <CatergoryCard name='study' count={study.length}/>
     </View>
     <View className='flex-row justify-around'>
-    <CatergoryCard />
-      <CatergoryCard />
+    <CatergoryCard name='work' count={work.length} />
+    <CatergoryCard name='family' count={family.length} />
     </View>
     <View className='flex-row justify-around'> 
-    <CatergoryCard />
-    <CatergoryCard />
-    </View>
-    <View className='flex-row justify-around'>
-    <CatergoryCard />
-    <CatergoryCard />
+
+    <CatergoryCard name='sport' count={sport.length} /> 
+    <CatergoryCard name='uncatergorized' count={uncatergorized.length} />
+
     </View>
       </View>
     </ScrollView>
-       
       </View>
   )
 }
